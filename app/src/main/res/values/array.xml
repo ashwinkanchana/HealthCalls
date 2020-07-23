@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+    <array name="gender_array">
+    <item name="f" >Female</item>
+    <item name="m">Male</item>
+        <item name="o">Non-Binary</item>
+    </array>
+
+
+    <array name="medication_type">
+        <item name="drops">Units</item>
+        <item name="pills" >Pills</item>
+        <item name="drops">Drops</item>
+        <item name="capsules">Capsules</item>
+    </array>
+
+</resources>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="12dp"
+    tools:context=".ProfileFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+       android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="0dp"
+        app:cardElevation="0dp"
+        style="@style/Widget.MaterialComponents.CardView"
+        app:cardBackgroundColor="?android:attr/windowBackground"
+        app:strokeColor="@color/colorGrey2"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="8dp">
+    <RelativeLayout
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:text="Name"
+        android:textColor="@color/colorBlue"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:layout_below="@id/name"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp" />
+
+   <de.hdodenhof.circleimageview.CircleImageView
+       android:id="@+id/profile_image"
+       android:layout_width="120dp"
+       android:layout_height="120dp"
+       android:src="@drawable/profile_avatar_circle"
+       android:layout_alignParentEnd="true"/>
+
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:layout_below="@id/name_text_view"
+        android:textColor="@color/colorBlue"
+        android:text="Age"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/age_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:layout_below="@id/age"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:layout_below="@id/age_text_view"
+        android:textColor="@color/colorBlue"
+        android:text="Gender"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/gender_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:layout_below="@id/gender"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sans"
+        android:layout_below="@id/gender_text_view"
+        android:text="Contact"
+        android:textColor="@color/colorBlue"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/phone_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/str"
+        android:fontFamily="@font/sans"
+        android:textColor="@color/colorBlack"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp" />
+    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/logout_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:textAppearance="@style/fab_text"
+        android:layout_margin="12dp"
+        android:elevation="8dp"
+        app:elevation="8dp"
+        app:backgroundTint="@color/colorBlue"
+        android:textColor="@color/colorWhite"
+        app:layout_anchor="@id/card"
+        app:layout_anchorGravity="bottom|end"
+        android:text="Logout"
+
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

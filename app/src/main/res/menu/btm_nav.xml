@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/outline_home_black_48dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navPrescription"
+        android:icon="@drawable/outline_receipt_black_48dp"
+        android:title="Prescriptions" />
+    <item
+        android:id="@+id/navProfile"
+        android:icon="@drawable/outline_person_black_48dp"
+        android:title="Profile"
+        />
+
+</menu>

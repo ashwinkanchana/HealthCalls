@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:fontFamily">@font/sans_medium</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="BottomNavigationViewText" parent="@style/Widget.MaterialComponents.BottomNavigationView">
+        <item name="fontFamily">@font/sans_bold</item>
+    </style>
+
+
+    <style name="fab_text" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/sans_medium</item>
+
+    </style>
+
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar" tools:targetApi="honeycomb">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/logo_splash</item>
+    </style>
+
+</resources>
