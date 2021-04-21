@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if(ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION)
+                if(ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(
                             getActivity(),
@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
                 if(ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),Manifest.permission.SEND_SMS)
                         != PackageManager.PERMISSION_GRANTED){
                         ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},REQUEST_CODE_SMS);
-                    }*/
+                    }
 
                 getLocation();
 
@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        /*if(requestCode == REQUEST_CODE_LOCATION_PERMISSION&& grantResults.length>0){
+        if(requestCode == REQUEST_CODE_LOCATION_PERMISSION&& grantResults.length>0){
             if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
 
             }else{
@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
             }
-        }*/
+        }
 
     }
 
