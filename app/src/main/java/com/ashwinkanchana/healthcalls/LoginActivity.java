@@ -2,6 +2,7 @@ package com.ashwinkanchana.healthcalls;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -9,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -172,13 +174,16 @@ public class LoginActivity extends AppCompatActivity implements NumberPicker.OnV
        // ignoreBatteryOptimizations();
         ActivityCompat.requestPermissions(
                 this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.SEND_SMS,
+                        Manifest.permission.READ_PHONE_STATE},
                 1);
-        ActivityCompat.requestPermissions(
-                this,
-                new String[]{Manifest.permission.SEND_SMS},
-                2);
     }
+
+
+
+
+
 
     /*@SuppressLint("BatteryLife")
     private void ignoreBatteryOptimizations(){

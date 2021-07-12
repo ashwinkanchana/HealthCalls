@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sans"
-        android:textSize="24sp"
+        android:layout_marginTop="200dp"
         android:gravity="center" />
     <TextView
         android:id="@+id/address"
@@ -22,7 +22,7 @@
         android:layout_below="@id/latlong"
         android:layout_width="wrap_content"
         android:fontFamily="@font/sans"
-        android:textSize="24sp"
+        android:textAlignment="center"
         android:layout_height="wrap_content"
         android:layout_above="@id/panic_button" />
 
