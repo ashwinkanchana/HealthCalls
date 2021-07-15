@@ -55,7 +55,7 @@ import static com.ashwinkanchana.healthcalls.Constants.PREF_MEDICATION_LIST;
 import static com.ashwinkanchana.healthcalls.Constants.THRICE_A_DAY;
 import static com.ashwinkanchana.healthcalls.Constants.TWICE_A_DAY;
 
-public class AddMedicineActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener,MonthYearPickerDialog.ExampleDialogListener {
+public class AddMedicineActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private TextInputLayout nameLayout,inventoryLayout,quantityLayout;
     private EditText medicationNameEditText,medicationQuantityEditText,medicationInventoryEditText;
     private Spinner unitSpinner;
@@ -67,7 +67,7 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
     private int medicationQuantity;
     private int medicationInventory;
     private int expiryMonth,expiryYear;
-    private Button timeOne,timeTwo,timeThree,takePhoto,addExpiry,done;
+    private Button timeOne,timeTwo,timeThree,takePhoto,done;
     private ImageView imageView;
     private TextView time1,time2,time3;
     private int clickedTime,editIndex;
@@ -87,6 +87,7 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meds);
         Intent intent = getIntent();
+        //If there is a bundle then edit existing medication
         if(intent.hasExtra("BUNDLE")){
             Bundle args = intent.getBundleExtra("BUNDLE");
             editIndex = args.getInt("INDEX");
@@ -101,10 +102,8 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
                 e.printStackTrace();
             }
         }else{
-
             loadData();
             isEdit = false;
-
         }
 
 
@@ -267,13 +266,7 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
                 }
             }
         });
-        /*addExpiry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MonthYearPickerDialog expiry = new MonthYearPickerDialog();
-                expiry.show(getSupportFragmentManager(), "expiry");
-            }
-        });*/
+
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -376,14 +369,11 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
 
             if(isEdit)
                 newphoto = true;
-
         }
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-
         if(clickedTime==1){
             c1.set(Calendar.HOUR_OF_DAY,hourOfDay);
             c1.set(Calendar.MINUTE,minute);
@@ -423,14 +413,11 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
     }
 
     private void addMedication() {
-
         medicationName = medicationNameEditText.getText().toString().trim();
         medicationQuantity = Integer.parseInt(medicationQuantityEditText.getText().toString());
         medicationInventory = Integer.parseInt(medicationInventoryEditText.getText().toString());
         medicationUnit = unitSpinner.getSelectedItem().toString();
-        Log.i("t1",String.valueOf(t1));
-        Log.i("t2",String.valueOf(t2));
-        Log.i("t3",String.valueOf(t3));
+
         if(medicationFrequency == 1 && t1)
             addMedicationItem();
         else if(medicationFrequency == 2 && t1 && t2)
@@ -471,8 +458,6 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
                         expiryYear,
                         medicationName,
                         c1, c2, c3));
-
-
         }
         else {
 
@@ -577,20 +562,6 @@ public class AddMedicineActivity extends AppCompatActivity implements TimePicker
         }
 
     }
-
-
-
-
-    @Override
-    public void expiry(int month, int year) {
-        expiryMonth = month;
-        expiryYear = year;
-        if(isEdit){
-            medicationList.get(editIndex).setExpiryMonth(month);
-            medicationList.get(editIndex).setExpiryYear(year);
-        }
-    }
-
 
 
 

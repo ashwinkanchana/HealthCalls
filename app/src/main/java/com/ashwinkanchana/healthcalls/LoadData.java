@@ -23,6 +23,8 @@ public class LoadData {
         this.context = context;
     }
 
+
+    //get data from shared preferences
     public ArrayList<Medication> load(){
         SharedPreferences prefs = context.getSharedPreferences(PREF_MEDICATION,MODE_PRIVATE);
         Gson gson = new Gson();
@@ -38,16 +40,5 @@ public class LoadData {
         return medicationList;
 
     }
-
-    public void store() {
-        SharedPreferences prefs = context.getSharedPreferences(PREF_MEDICATION,MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(medicationList);
-        editor.putString(PREF_MEDICATION_LIST,json);
-        editor.apply();
-    }
-
-
 
 }

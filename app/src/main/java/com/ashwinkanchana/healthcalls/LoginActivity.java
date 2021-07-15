@@ -76,12 +76,7 @@ public class LoginActivity extends AppCompatActivity implements NumberPicker.OnV
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                  gender = genderSpinner.getSelectedItem().toString();
-                /*if(gender.equals(KEY_GENDER_FEMALE))
-                    gender = "Female";
-                if(gender.equals(KEY_GENDER_MALE))
-                    gender = "Male";
-                if(gender.equals(KEY_GENDER_OTHERS))
-                    gender = "Non-Binary";*/
+
             }
 
             @Override
@@ -112,24 +107,19 @@ public class LoginActivity extends AppCompatActivity implements NumberPicker.OnV
         dob = newVal;
     }
     private void login() {
-
         name = nameEditText.getText().toString().trim();
         String phone = phoneEditText.getText().toString().trim();
         SharedPreferences.Editor editor = prefs.edit();
-
-
         editor.putString(PREF_KEY_NAME,name);
         editor.putInt(PREF_KEY_DOB,dob);
         editor.putString(PREF_KEY_GENDER,gender);
         editor.putString(PREF_KEY_PHONE,phone);
         editor.putBoolean(PREF_KEY_IS_LOGGED_IN,true);
         editor.putBoolean(PREF_KEY_IS_FIRST_TIME,true);
-
         editor.apply();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 Intent intent = new Intent(LoginActivity.this, AddMedicineActivity.class);
                 LoginActivity.this.startActivity(intent);
                 LoginActivity.this.finish();
@@ -162,6 +152,8 @@ public class LoginActivity extends AppCompatActivity implements NumberPicker.OnV
 
     }
 
+
+    //exit app on back press
     @Override
     public void onBackPressed() {
         finishAffinity();
@@ -171,7 +163,8 @@ public class LoginActivity extends AppCompatActivity implements NumberPicker.OnV
     @Override
     protected void onStart() {
         super.onStart();
-       // ignoreBatteryOptimizations();
+
+        //request runtime permissions
         ActivityCompat.requestPermissions(
                 this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
@@ -180,28 +173,6 @@ public class LoginActivity extends AppCompatActivity implements NumberPicker.OnV
                 1);
     }
 
-
-
-
-
-
-    /*@SuppressLint("BatteryLife")
-    private void ignoreBatteryOptimizations(){
-        Intent intent = new Intent();
-        String packageName = this.getPackageName();
-        PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (Objects.requireNonNull(pm).isIgnoringBatteryOptimizations(packageName))
-                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-            else
-            {
-                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-                intent.setData(Uri.parse("package:" + packageName));
-            }
-        }
-        this.startActivity(intent);
-    }*/
 }
 
 

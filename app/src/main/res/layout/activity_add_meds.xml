@@ -129,10 +129,10 @@
             android:id="@+id/headerIndicator"
             android:layout_gravity="center_vertical|end"
             android:layout_height="wrap_content"
-            android:tint="@color/colorBlack"
             android:layout_marginEnd="16dp"
             android:layout_width="wrap_content"
-            app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+            app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp"
+            app:tint="@color/colorBlack" />
 
 
     </com.github.florent37.expansionpanel.ExpansionHeader>

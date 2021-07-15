@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+
+//Medication model, Serializable to store as string via GSON
 public class Medication implements Serializable {
     private String name;
     private String unit;

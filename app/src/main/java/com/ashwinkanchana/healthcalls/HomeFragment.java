@@ -44,12 +44,13 @@ import static com.ashwinkanchana.healthcalls.Constants.PREF_KEY_PHONE;
 public class HomeFragment extends Fragment {
 
     private int permissionCheck;
-    private String coordinates,address;
-    private static final int REQUEST_CODE_LOCATION_PERMISSION =1;
-    private static final int REQUEST_CODE_SMS =2;
-    private TextView textView1,textView2;
+    private String coordinates, address;
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
+    private static final int REQUEST_CODE_SMS = 2;
+    private TextView textView1, textView2;
     private Button btn;
     private ResultReceiver resultReceiver;
+
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
@@ -74,8 +75,8 @@ public class HomeFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(
                             getActivity(),
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -84,16 +85,12 @@ public class HomeFragment extends Fragment {
                 }
 
 
-                if(ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),Manifest.permission.SEND_SMS)
-                        != PackageManager.PERMISSION_GRANTED){
-                        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS},REQUEST_CODE_SMS);
-                    }
+                if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.SEND_SMS)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, REQUEST_CODE_SMS);
+                }
 
                 getLocation();
-
-
-
-
 
 
             }
@@ -103,18 +100,17 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode == REQUEST_CODE_LOCATION_PERMISSION&& grantResults.length>0){
-            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_CODE_LOCATION_PERMISSION && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-            }else{
+            } else {
                 Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
             }
-        }else if(requestCode == REQUEST_CODE_SMS&& grantResults.length>0) {
+        } else if (requestCode == REQUEST_CODE_SMS && grantResults.length > 0) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
             } else {
@@ -125,15 +121,25 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void getLocation(){
+    private void getLocation() {
 
-
+        //get coordinates
         final LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(3000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        //check location permission
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        //get coordinates
         LocationServices.getFusedLocationProviderClient(getActivity())
-                .requestLocationUpdates(locationRequest,new LocationCallback(){
+                .requestLocationUpdates(locationRequest, new LocationCallback() {
 
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
@@ -141,8 +147,8 @@ public class HomeFragment extends Fragment {
                         LocationServices.getFusedLocationProviderClient(getActivity())
                                 .removeLocationUpdates(this);
 
-                        if(locationResult != null &&locationResult.getLocations().size()>0){
-                            int latestLocationIndex = locationResult.getLocations().size()-1;
+                        if (locationResult != null && locationResult.getLocations().size() > 0) {
+                            int latestLocationIndex = locationResult.getLocations().size() - 1;
                             double latitude =
                                     locationResult.getLocations().get(latestLocationIndex).getLatitude();
                             double longitude =
@@ -152,6 +158,8 @@ public class HomeFragment extends Fragment {
                             textView1.setText(coordinates);
                             location.setLatitude(latitude);
                             location.setLongitude(longitude);
+
+                            //get address from coordinates via GeoCoder
                             fetchAddressFromLatLong(location);
                         }
 
@@ -183,6 +191,8 @@ public class HomeFragment extends Fragment {
                 SharedPreferences prefs = Objects.requireNonNull(getActivity()).getSharedPreferences(PACKAGE_NAME, MODE_PRIVATE);
                 String name = prefs.getString(PREF_KEY_NAME,"");
                 String phone = prefs.getString(PREF_KEY_PHONE,"").trim();
+
+                //send emergency sms
                 String message ="ALERT MESSAGE FROM: "+name+"\nCurrent Location:\n"+coordinates+"\nAddress:"+address;
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phone,null,message,null,null);

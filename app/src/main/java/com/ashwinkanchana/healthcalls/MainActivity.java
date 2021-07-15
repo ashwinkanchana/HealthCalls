@@ -37,14 +37,10 @@ import static com.ashwinkanchana.healthcalls.Constants.PREF_MEDICATION_LIST;
 import static com.ashwinkanchana.healthcalls.PrescriptionsFragment.REC_DATA;
 
 public class MainActivity extends AppCompatActivity implements ImageDialog.ImageDialogListener {
-
-
     private ViewPager viewPager;
     private BottomNavigationView navigation;
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
-    private Calendar c1,c2,c3;
-    private DialogListener listener;
     private ArrayList<Medication> medicationList;
 
 
@@ -87,15 +83,10 @@ public class MainActivity extends AppCompatActivity implements ImageDialog.Image
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
         navigation = findViewById(R.id.navigation);
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         loadData();
-
-
         setAlarms();
     }
-
 
 
 
@@ -135,16 +126,11 @@ public class MainActivity extends AppCompatActivity implements ImageDialog.Image
         String json = prefs.getString(PREF_MEDICATION_LIST,null);
         Type type = new TypeToken<ArrayList<Medication>>() {}.getType();
         medicationList = gson.fromJson(json,type);
-
-
         if(medicationList==null){
            medicationList = new ArrayList<Medication>();
         }
 
     }
-
-
-
 
     private void setAlarms() {
         Medication medication;
@@ -172,48 +158,21 @@ public class MainActivity extends AppCompatActivity implements ImageDialog.Image
         if(c.before(Calendar.getInstance())){
             c.add(Calendar.DATE,1);
         }
-        //alarmManager.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pendingIntent);
+
+        //set daily repeating alarm
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
 
     }
 
-    private void cancelAlarm(int requestCode){
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this,AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,requestCode,intent,0);
-        alarmManager.cancel(pendingIntent);
-
-    }
 
 
     @Override
     public void option(int option, int index) {
-        //listener.option(option,index);
         Intent retIntent = new Intent(REC_DATA);
         retIntent.putExtra("option", option);
         retIntent.putExtra("index", index);
         sendBroadcast(retIntent);
-
-        /*if(option==2){
-            Log.i("option main","2");
-            Intent intent = new Intent(this, AddMedicineActivity.class);
-            Bundle args = new Bundle();
-            args.putSerializable("ARRAYLIST",(Serializable)loadData.medicationList);
-            args.putInt("INDEX",index);
-            intent.putExtra("BUNDLE",args);
-            startActivity(intent);
-
-        }
-        if(option==3){
-            //remove
-            Log.i("option main","3");
-            loadData.medicationList.remove(index);
-        }*/
     }
-
-
-
-
 
 
     public interface DialogListener {

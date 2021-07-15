@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import androidx.viewpager.widget.ViewPager;
-
+    //custom viewpager for bottom navigation of fragments
 public class CustomViewPager extends ViewPager {
 
     private boolean enabled = false;

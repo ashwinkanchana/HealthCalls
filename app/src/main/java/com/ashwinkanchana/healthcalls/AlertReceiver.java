@@ -51,9 +51,6 @@ public class AlertReceiver extends BroadcastReceiver {
     }
 
 
-
-
-
     private void loadData(){
         SharedPreferences prefs = context.getSharedPreferences(PREF_MEDICATION,MODE_PRIVATE);
         Gson gson = new Gson();
@@ -61,21 +58,12 @@ public class AlertReceiver extends BroadcastReceiver {
         Type type = new TypeToken<ArrayList<Medication>>() {}.getType();
         medicationList = gson.fromJson(json,type);
 
-
         if(medicationList==null){
             medicationList = new ArrayList<Medication>();
         }
 
-
-
-
-
-
         loadImage(id);
         sendNotifiation(id);
-
-
-
     }
 
     private void loadImage(int index) {
@@ -96,16 +84,6 @@ public class AlertReceiver extends BroadcastReceiver {
                 reqCode,intent,0);
 
         Intent broadcastIntent = new Intent(context,NotificationService.class);
-        //Intent broadcastIntent = new Intent(context,NotificationReceiver.class);
-        //broadcastIntent.putExtra("index",index);
-        /*Bundle args = new Bundle();
-        args.putSerializable("ARRAYLIST",(Serializable)medicationList);
-        args.putInt("INDEX",id);
-        args.putInt("CODE",reqCode);
-        broadcastIntent.putExtra("BUNDLE",args);
-
-        PendingIntent actionIntent = PendingIntent.getBroadcast(context,reqCode,
-                broadcastIntent,PendingIntent.FLAG_UPDATE_CURRENT);*/
         Bundle args = new Bundle();
         args.putSerializable("ARRAYLIST",(Serializable)medicationList);
         args.putInt("INDEX",id);
@@ -117,7 +95,7 @@ public class AlertReceiver extends BroadcastReceiver {
 
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),R.drawable.logo_small);
 
-
+        //Build notification
         Notification notification = new NotificationCompat.Builder(
                 context,CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.outline_add_alert_black_48dp)

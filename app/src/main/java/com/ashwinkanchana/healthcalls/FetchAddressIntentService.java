@@ -34,6 +34,8 @@ public class FetchAddressIntentService extends IntentService {
             if(location == null){
                 return;
             }
+
+            //get address from coordinates
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> addresses = null;
             try {

@@ -42,12 +42,7 @@
             </intent-filter>
         </activity>
         <receiver android:name=".AlertReceiver"/>
-        <receiver android:name=".NotificationReceiver"/>
-        <receiver android:name=".BootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
+
         <provider
             android:authorities="com.ashwinkanchana.healthcalls.fileproviders"
             android:name="androidx.core.content.FileProvider"

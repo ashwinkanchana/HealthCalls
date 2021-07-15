@@ -43,14 +43,10 @@ public class NotificationService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        //firstcall
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-
-
         if(intent.hasExtra("BUNDLE")) {
             Bundle args = intent.getBundleExtra("BUNDLE");
             index = args.getInt("INDEX");
@@ -75,30 +71,12 @@ public class NotificationService extends Service {
                 .setAutoCancel(true)
                 .build();
 
+        //start foreground service
         startForeground(reqCode,notification);
 
+        //START_NOT_STICKY tells the OS to not bother recreating the service if killed
         return START_NOT_STICKY;
-        //every call
-
     }
-
-
-
-    private void loadData() {
-        SharedPreferences prefs = getSharedPreferences(PREF_MEDICATION,MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = prefs.getString(PREF_MEDICATION_LIST,null);
-        Type type = new TypeToken<ArrayList<Medication>>() {}.getType();
-        medicationList = gson.fromJson(json,type);
-
-
-        if(medicationList==null){
-            medicationList = new ArrayList<Medication>();
-        }
-
-    }
-
-
 
     private void storeData() {
         SharedPreferences prefs = getSharedPreferences(PREF_MEDICATION,MODE_PRIVATE);
@@ -109,17 +87,9 @@ public class NotificationService extends Service {
         editor.apply();
         Toast.makeText(getApplicationContext(),"Inventory updated",Toast.LENGTH_SHORT).show();
         NotificationManager notifyMgr = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-
         notifyMgr.cancel(reqCode);
         stopSelf();
-
     }
-
-
-
-
-
-
 
 
     @Nullable

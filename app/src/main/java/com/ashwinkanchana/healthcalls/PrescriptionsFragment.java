@@ -160,9 +160,6 @@ public class PrescriptionsFragment extends Fragment {
             mAdapter.notifyItemRemoved(index);
             mAdapter.notifyItemRangeChanged(index,medicationList.size());
             store();
-
-
-
         }
     }
 

@@ -37,11 +37,6 @@ public class ImageDialog extends DialogFragment {
     }
 
 
-
-
-
-
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -60,7 +55,7 @@ public class ImageDialog extends DialogFragment {
         }
 
 
-
+        //build dialog
         final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(medicationList.get(index).getName())
@@ -99,9 +94,6 @@ public class ImageDialog extends DialogFragment {
         });
         return dialog;
     }
-
-
-
 
 
     @Override

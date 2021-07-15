@@ -1,7 +1,7 @@
 package com.ashwinkanchana.healthcalls;
 
 public class Constants {
-
+    //constant key values for shared preferences
     public static final String PACKAGE_NAME = "com.ashwinkanchana.healthcalls";
 
     public static final String PREF_MEDICATION = "medication_pref";

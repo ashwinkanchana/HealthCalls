@@ -43,8 +43,8 @@ public class App extends Application {
             );
             channel2.setDescription("Service");
             NotificationManager manager = getSystemService(NotificationManager.class);
+            //create notification channel
             manager.createNotificationChannel(channel1);
-
             manager.createNotificationChannel(channel2);
         }
     }
